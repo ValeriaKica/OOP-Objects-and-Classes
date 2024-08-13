@@ -16,8 +16,7 @@ data class Post(
     val likes: Likes =Likes(0)// лайки
 
 )
-object
-WallService {
+class WallService {
     //для хранение постов внутри
     private var posts = emptyArray<Post>()
     private var lastId = 0// хранениние индификатора
@@ -48,8 +47,9 @@ WallService {
 
 fun main(){
     val  likes = Likes(100)
+    val posts = WallService()
     // добовляем посты
-    WallService.add(Post(1,
+    posts.add(Post(1,
         294,
         492,
         "content",
@@ -61,7 +61,7 @@ fun main(){
         true,
         true,
         likes))
-    WallService.add(Post(1,
+    posts.add(Post(1,
         472,
         7941,
         "content",
@@ -72,11 +72,11 @@ fun main(){
         true,
         true,
         true))
-    WallService.print()
+    posts.print()
     likes.count = 1
-    WallService.print()
+    posts.print()
     //обновляем пост который у нас есть
-    println(WallService.update(Post(2,
+    println(posts.update(Post(2,
         472,
         7941,
         "content",
@@ -88,9 +88,9 @@ fun main(){
         true,
         true,
         likes)))
-    WallService.print()
+    posts.print()
     // пытаемся обновить пост которого нет
-    println(WallService.update(Post(70,
+    println(posts.update(Post(70,
         472,
         7941,
         "content",
@@ -101,5 +101,5 @@ fun main(){
         true,
         true,
         true)))
-    WallService.print()
+    posts.print()
 }

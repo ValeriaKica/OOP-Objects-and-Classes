@@ -6,7 +6,7 @@ class WallServiceTest {
 
     @Test
     fun add() {
-        val service = WallService
+        val service = WallService()
         val post1 = service.add(Post(
             1,
             294,
@@ -26,7 +26,7 @@ class WallServiceTest {
 
     @Test
     fun updateExisting() {
-        val service = WallService
+        val service = WallService()
          service.add( Post(1,
             294,
             492,
@@ -54,7 +54,7 @@ class WallServiceTest {
             Likes(200)
         ))
 
-        val result = service.update(Post(2,
+        val update = Post(2,
             472,
             7271,
             "Music",
@@ -66,13 +66,14 @@ class WallServiceTest {
             true,
             true,
             Likes(200)
-        ))
+        )
         // проверяем результат (используйте assertTrue или assertFalse)
+        val result = service.update(update)
         assertTrue(result)
     }
     @Test
     fun updateNotRenewal(){
-        val service = WallService
+        val service = WallService()
         service.add( Post(1,
             294,
             492,
@@ -86,7 +87,7 @@ class WallServiceTest {
             true,
             Likes(100)
         ))
-        val result = service.update(Post(
+        val update  = Post(
             430,
             294987,
             49682,
@@ -99,7 +100,8 @@ class WallServiceTest {
             true,
             true,
             Likes(100)
-        ))
+        )
+        val result = service.update(update)
         assertFalse(result)
     }
 }
