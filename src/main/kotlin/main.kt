@@ -16,7 +16,8 @@ data class Post(
     val likes: Likes =Likes(0)// лайки
 
 )
-object WallService {
+object
+WallService {
     //для хранение постов внутри
     private var posts = emptyArray<Post>()
     private var lastId = 0// хранениние индификатора
