@@ -16,33 +16,34 @@ data class Post(
     val likes: Likes =Likes(0)// лайки
 
 )
-object WallService{//для хранение постов внутри
-private var  posts = emptyArray<Post>()
+object WallService {
+    //для хранение постов внутри
+    private var posts = emptyArray<Post>()
     private var lastId = 0// хранениние индификатора
 
-    fun add(post: Post):Post{//добавляе пост на страницу
-        posts += post.copy(id = ++ lastId, likes = post.likes.copy())
+    fun add(post: Post): Post {//добавляе пост на страницу
+        posts += post.copy(id = ++lastId, likes = post.likes.copy())
         return posts.last()
     }
-    fun update(newPost: Post):Boolean{// обновление постов
-        for ((index, post) in posts.withIndex()){
-            if(post.id ==newPost.id){
-                posts[index] =newPost.copy(likes = post.likes.copy())
+
+    fun update(newPost: Post): Boolean {// обновление постов
+        for ((index, post) in posts.withIndex()) {
+            if (post.id == newPost.id) {
+                posts[index] = newPost.copy(likes = post.likes.copy())
                 return true
             }
         }
         return false
     }
-    fun print(){//печать постов на экран
-        for(post in posts){
+
+    fun print() {//печать постов на экран
+        for (post in posts) {
             print(post)
             print(" ")
         }
         println()
     }
-
 }
-
 
 fun main(){
     val  likes = Likes(100)
