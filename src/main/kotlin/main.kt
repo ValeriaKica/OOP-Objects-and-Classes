@@ -1,6 +1,30 @@
 
 data class Likes(var count:Int)
+data class  PostSource(
+    val type:String,
+    val platform :String,
+    val data:String,
+    val url :String
+)
+class PhotoAttachment(param:Photo) :Attachment{
+    override var type:String ="photo"
+    val photo =param
+    override fun toString(): String {
+        return "\n $photo"
+    }
+}
 
+class VideoAttachment(param:Video):Attachment{
+    override var type:String= "video"
+    val video = param
+
+    override fun toString(): String {
+        return "\n $video"
+    }
+}
+interface Attachment {
+    val type: String
+}
 data class Post(
     val id:Int,//индификатор записи
     val ownerId: Int,// Идентификатор владельца стены
@@ -10,6 +34,8 @@ data class Post(
     val replyPostId:Int,//Идентификатор записи, в ответ на которую была оставлена текущая.
     val date : Int,// Время публикации
     val postType: String,//Тип записи
+    val postSource: PostSource?,
+    val attachment:Array <Attachment>? = emptyArray(),
     val canPin: Boolean,//Информация о том, может ли текущий пользователь закрепить запись
     val canDelete:Boolean,//Информация о том, может ли текущий пользователь удалить запись
     val canEdit:Boolean,//Информация о том, может ли текущий пользователь редактировать запись
@@ -46,6 +72,31 @@ class WallService {
 }
 
 fun main(){
+    val video1 =Video(
+        535,
+        5313,
+        "fgh",
+        "hji",
+        5412,
+        5766,
+        8,
+        7965,
+        632485,
+        85
+    )
+    val photo1 =Photo(
+        76,
+        6341,
+        568,
+        674,
+        "ujf",
+        521,
+        arrayOf(Sizes("size1","url",82,14)),
+        156,
+        466
+    )
+    val  attachmentVideo1 =VideoAttachment(video1)
+    val attachmentPhoto1 = PhotoAttachment(photo1)
     val  likes = Likes(100)
     val posts = WallService()
     // добовляем посты
@@ -57,6 +108,8 @@ fun main(){
         23,
         1111,
         "Games",
+        PostSource("das","sda","adddw","rqxd"),
+        arrayOf(attachmentPhoto1,attachmentVideo1),
         true,
         true,
         true,
@@ -69,6 +122,8 @@ fun main(){
         542,
         455,
         "Entertainment",
+        PostSource("das","sda","adddw","rqxd"),
+        arrayOf(attachmentPhoto1,attachmentVideo1),
         true,
         true,
         true))
@@ -84,6 +139,8 @@ fun main(){
         542,
         100222,
         "Music",
+        PostSource("das","sda","adddw","rqxd"),
+        arrayOf(attachmentPhoto1,attachmentVideo1),
         true,
         true,
         true,
@@ -98,6 +155,8 @@ fun main(){
         6564,
         300521,
         "Entertainment",
+        PostSource("das","sda","adddw","rqxd"),
+        arrayOf(attachmentPhoto1,attachmentVideo1),
         true,
         true,
         true)))
